@@ -15,7 +15,11 @@ jobs:
             apk add --no-cache py-pip=9.0.0-r1
 
             curl https://raw.githubusercontent.com/kubernetes/helm/master/scripts/get | bash
-            pip install docker-compose==1.16.1
+            # pip install docker-compose==1.16.1
+            curl -o /usr/local/bin/docker-compose -L "https://github.com/docker/compose/releases/download/1.15.0/docker-compose-$(uname -s)-$(uname -m)"
+            chmod +x /usr/local/bin/docker-compose
+            docker-compose -v
+
 
       - run:
           name: Run tests
