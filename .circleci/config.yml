@@ -12,7 +12,7 @@ jobs:
           command: |
             apk add --no-cache bash
             apk add --no-cache curl
-            apk add --no-cache py-pip=9.0.0-r1
+            # apk add --no-cache py-pip=9.0.0-r1
 
             curl https://raw.githubusercontent.com/kubernetes/helm/master/scripts/get | bash
             # pip install docker-compose==1.16.1
