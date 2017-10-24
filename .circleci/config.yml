@@ -3,15 +3,18 @@ jobs:
   build:
     working_directory: /app
     docker:
-      - image: docker:17.05.0-ce-git
+      - image: docker:17.10.0-ce-git
     steps:
       - checkout
       - setup_remote_docker
       - run:
           name: Install dependencies
           command: |
-            https://raw.githubusercontent.com/kubernetes/helm/master/scripts/get | bash
+            apk add --no-cache bash
+            apk add --no-cache curl
             apk add --no-cache py-pip=9.0.0-r1
+
+            curl https://raw.githubusercontent.com/kubernetes/helm/master/scripts/get | bash
             pip install docker-compose==1.16.1
 
       - run:
