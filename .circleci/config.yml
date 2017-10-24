@@ -3,23 +3,35 @@ jobs:
   build:
     working_directory: /app
     docker:
-      - image: docker:17.10.0-ce-git
+      - image: ubuntu
     steps:
       - checkout
       - setup_remote_docker
       - run:
           name: Install dependencies
           command: |
-            apk add --no-cache bash
-            apk add --no-cache curl
-            # apk add --no-cache py-pip=9.0.0-r1
+            apt-get install -y build-essential
+            apt-get install -y python-pip
 
+            # Install golang
+            wget https://godeb.s3.amazonaws.com/godeb-amd64.tar.gz
+            tar xfz godeb-amd64.tar.gz
+            ./godeb install 1.9.1
+            go version
+
+            # Install docker-engine
+            wget -qO- https://get.docker.com/ | sh
+            usermod -aG docker $PROVISION_USER
+            docker -v
+
+            # Install helm
             curl https://raw.githubusercontent.com/kubernetes/helm/master/scripts/get | bash
-            # pip install docker-compose==1.16.1
+            helm version
+
+            # Install docker-compose
             curl -o /usr/local/bin/docker-compose -L "https://github.com/docker/compose/releases/download/1.15.0/docker-compose-$(uname -s)-$(uname -m)"
             chmod +x /usr/local/bin/docker-compose
             docker-compose -v
-
 
       - run:
           name: Run tests
