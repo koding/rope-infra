@@ -1,0 +1,11 @@
+version: 0.1
+name: count
+description: Count worker does the accounting for Rope systems.
+home: https://rope.live
+keywords:
+- mongodb
+- redis
+- rope
+maintainers:
+- email: cihangir@koding.com
+  name: Cihangir Savas
