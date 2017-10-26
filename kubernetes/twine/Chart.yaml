@@ -1,0 +1,11 @@
+version: 0.1
+name: twine
+description: Twine worker connects the ropes in Rope system.
+home: https://rope.live
+keywords:
+- mongodb
+- redis
+- rope
+maintainers:
+- email: gokmen@koding.com
+  name: Gokmen Goksel

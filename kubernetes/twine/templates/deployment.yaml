@@ -1,0 +1,39 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: {{ template "twine.fullname" . }}
+  labels:
+    app: {{ template "twine.fullname" . }}
+    chart: "{{ .Chart.Name }}-{{ .Chart.Version }}"
+    release: "{{ .Release.Name }}"
+    heritage: "{{ .Release.Service }}"
+spec:
+  template:
+    metadata:
+      labels:
+        app: {{ template "twine.fullname" . }}
+    spec:
+      containers:
+        - name: {{ template "twine.fullname" . }}
+          image: "{{ .Values.image }}"
+          imagePullPolicy: {{ default "" .Values.imagePullPolicy | quote }}
+          command:
+            - "/app/twine-server"
+          env:
+            - name: REDIS_URL
+              valueFrom:
+                secretKeyRef:
+                  name: {{ template "twine.fullname" . }}
+                  key: redis-url
+            - name: TWINE_SECRET
+              valueFrom:
+                secretKeyRef:
+                  name: {{ template "twine.fullname" . }}
+                  key: twine-secret
+            - name: PORT
+              value: "{{ .Values.port }}"
+          ports:
+            - name: http
+              containerPort: {{ .Values.port }}
+          resources:
+{{ toYaml .Values.resources | indent 12 }}
