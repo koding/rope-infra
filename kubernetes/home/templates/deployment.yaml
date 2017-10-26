@@ -1,0 +1,49 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: {{ template "home.fullname" . }}
+  labels:
+    app: {{ template "home.fullname" . }}
+    chart: "{{ .Chart.Name }}-{{ .Chart.Version }}"
+    release: "{{ .Release.Name }}"
+    heritage: "{{ .Release.Service }}"
+spec:
+  template:
+    metadata:
+      labels:
+        app: {{ template "home.fullname" . }}
+    spec:
+      containers:
+        - name: {{ template "home.fullname" . }}
+          image: "{{ .Values.image }}"
+          imagePullPolicy: {{ default "" .Values.imagePullPolicy | quote }}
+          command:
+            - "gulp"
+          env:
+            - name: MONGO_ADDR
+              valueFrom:
+                secretKeyRef:
+                  name: {{ template "home.fullname" . }}
+                  key: mongodb-url
+            - name: GITHUB_CLIENT_ID
+              valueFrom:
+                secretKeyRef:
+                  name: {{ template "home.fullname" . }}
+                  key: github-client-id
+            - name: GITHUB_CLIENT_SECRET
+              valueFrom:
+                secretKeyRef:
+                  name: {{ template "home.fullname" . }}
+                  key: github-client-secret
+            - name: SESSION_SECRET
+              valueFrom:
+                secretKeyRef:
+                  name: {{ template "home.fullname" . }}
+                  key: session-secret
+            - name: PORT_SERVER
+              value: "{{ .Values.port }}"
+          ports:
+            - name: http
+              containerPort: {{ .Values.port }}
+          resources:
+{{ toYaml .Values.resources | indent 12 }}

@@ -1,0 +1,10 @@
+version: 0.1
+name: home
+description: Home worker serves the homepage of the Rope system.
+home: https://rope.live
+keywords:
+- mongodb
+- rope
+maintainers:
+- email: gokmen@koding.com
+  name: Gokmen Goksel
