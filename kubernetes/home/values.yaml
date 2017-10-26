@@ -1,0 +1,25 @@
+image: "ropelive/home:latest"
+
+## Specify a imagePullPolicy
+## 'Always' if imageTag is 'latest', else set to 'IfNotPresent'
+## ref: http://kubernetes.io/docs/user-guide/images/#pre-pulling-images
+##
+# imagePullPolicy:
+
+mongodbURL: "mongodb://rope_admin:minda@mongodb-mongodb:27017/rope"
+githubClientId: id
+githubClientSecret: secret
+sessionSecret: session_secret
+
+## Kubernetes service type
+serviceType: ClusterIP
+
+port: 9000
+
+## Configure resource requests and limits
+## ref: http://kubernetes.io/docs/user-guide/compute-resources/
+##
+resources:
+  requests:
+    memory: 256Mi
+    cpu: 100m
