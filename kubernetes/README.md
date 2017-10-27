@@ -86,8 +86,14 @@ helm upgrade redis ./redis --install
 kubectl run name-redis-client --rm --tty -i --image bitnami/redis:3.2.9-r2 -- bash
 ```
 
-## Version Upgrades
+## Chart Version Upgrades
 
 ### keel
 
 helm fetch kubernetes-charts/keel --untar --destination ./kubernetes/keel
+helm fetch kubernetes-charts/kube-state-metrics --untar --destination ./kubernetes/kube-state-metrics
+helm fetch kubernetes-charts/mongodb --untar --destination ./kubernetes/mongodb
+helm fetch kubernetes-charts/prometheus --untar --destination ./kubernetes/prometheus
+helm fetch kubernetes-charts/redis --untar --destination ./kubernetes/redis
+helm fetch kubernetes-charts/spotify-docker-gc --untar --destination ./kubernetes/spotify-docker-gc
+helm fetch kubernetes-charts/stash --untar --destination ./kubernetes/stash
