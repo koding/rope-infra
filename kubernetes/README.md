@@ -68,7 +68,6 @@ helm upgrade keel ./keel --install --namespace <namespace>
 
 mongodb chart deploys [mongodb](https://www.mongodb.com/). Please see the Values.yaml file for the configuration parameters.
 
-
 Installation and Upgrades:
 
 note: Do not forget to add namespace as a prefix, mongodb uses PVC and PVCs are not namepsaced.

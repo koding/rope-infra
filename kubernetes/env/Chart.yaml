@@ -1,0 +1,11 @@
+version: 0.1
+name: env
+description: env chart handles the required data for an environment.
+home: https://rope.live
+keywords:
+- mongodb
+- redis
+- rope
+maintainers:
+- email: cihangir@koding.com
+  name: Cihangir Savas
