@@ -14,7 +14,7 @@ polling:
 
 # Helm provider support
 helmProvider:
-  enabled: false
+  enabled: true
 
 # Google Container Registry
 # GCP Project ID
@@ -32,9 +32,9 @@ webhook:
 
 # Slack Notification
 slack:
-  enabled: false
+  enabled: true
   token: ""
-  channel: ""
+  channel: "https://hooks.slack.com/services/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"
 
 # Keel service
 # Enable to receive webhooks from Docker registries
@@ -67,20 +67,20 @@ keel:
   # trigger type, defaults to events such as pubsub, webhooks
   trigger: poll
   # polling schedule
-  pollSchedule: "@every 3m"
+  pollSchedule: "@every 10m"
   # images to track and update
   images:
    - repository: image.repository
      tag: image.tag
 
 # Resources
-#resources:
-#  limits:
-#    cpu: 100m
-#    memory: 128Mi
-#  requests:
-#    cpu: 50m
-#    memory: 64Mi
+resources:
+ limits:
+   cpu: 100m
+   memory: 128Mi
+ requests:
+   cpu: 50m
+   memory: 64Mi
 
 # NodeSelector
 nodeSelector: {}
