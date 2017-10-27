@@ -27,6 +27,7 @@ resources:
 keel:
   policy: force # (all/major/minor/patch/force)
   trigger: poll
+  approvals: 0
   pollSchedule: "@every 1m"
   images:
    - repository: image.repository
