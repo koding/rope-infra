@@ -36,4 +36,4 @@ jobs:
       - run:
           name: Run tests
           command: |
-            helm lint ./kubernetes/count
+            helm lint --strict ./kubernetes/* 
