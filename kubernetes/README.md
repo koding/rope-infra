@@ -23,6 +23,16 @@ helm --help
 
 ## Charts
 
+### Env
+
+Env chart prepares the environments for the whole system. It creates staging and production namespaces respectively
+
+note: namespace is not required for this command
+
+```sh
+helm upgrade rope ./env  --install
+```
+
 ### Count
 
 Count chart deploys both "counter" and "compactor" workers. Please see the Values.yaml file for the configuration parameters.
