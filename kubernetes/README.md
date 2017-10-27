@@ -44,6 +44,16 @@ Installation and Upgrades:
 helm upgrade home ./home --install
 ```
 
+### Keel
+
+Keel chart handles the auto update of the deployments. Please see the Values.yaml file for the configuration parameters.
+
+Installation and Upgrades:
+
+```sh
+helm upgrade home ./home --install
+```
+
 ### MongoDB
 
 mongodb chart deploys [mongodb](https://www.mongodb.com/). Please see the Values.yaml file for the configuration parameters.
@@ -96,4 +106,3 @@ helm fetch kubernetes-charts/mongodb --untar --destination ./kubernetes/mongodb
 helm fetch kubernetes-charts/prometheus --untar --destination ./kubernetes/prometheus
 helm fetch kubernetes-charts/redis --untar --destination ./kubernetes/redis
 helm fetch kubernetes-charts/spotify-docker-gc --untar --destination ./kubernetes/spotify-docker-gc
-helm fetch kubernetes-charts/stash --untar --destination ./kubernetes/stash
