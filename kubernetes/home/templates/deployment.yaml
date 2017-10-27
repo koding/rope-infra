@@ -15,8 +15,8 @@ spec:
     spec:
       containers:
         - name: {{ template "home.fullname" . }}
-          image: "{{ .Values.image }}"
-          imagePullPolicy: {{ default "" .Values.imagePullPolicy | quote }}
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+          imagePullPolicy: {{ default "" .Values.image.pullPolicy | quote }}
           command:
             - "gulp"
           env:

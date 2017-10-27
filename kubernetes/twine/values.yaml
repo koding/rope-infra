@@ -1,10 +1,11 @@
-image: ropelive/twine:latest
+image:
+  repository: ropelive/twine
+  tag: latest
+  pullPolicy: IfNotPresent
 
 ## Specify a imagePullPolicy
 ## 'Always' if imageTag is 'latest', else set to 'IfNotPresent'
 ## ref: http://kubernetes.io/docs/user-guide/images/#pre-pulling-images
-##
-# imagePullPolicy:
 
 redisURL: redis://redis-redis:6379
 secret: "my_super_awesome_secret"

@@ -1,10 +1,11 @@
-image: ropelive/countbase:latest
+image:
+  repository: ropelive/countbase
+  tag: latest
+  pullPolicy: IfNotPresent
 
 ## Specify a imagePullPolicy
 ## 'Always' if imageTag is 'latest', else set to 'IfNotPresent'
 ## ref: http://kubernetes.io/docs/user-guide/images/#pre-pulling-images
-##
-# imagePullPolicy:
 
 mongodbURL: mongodb://rope_admin:minda@mongodb-mongodb:27017/rope
 redisURL: redis-redis:6379
