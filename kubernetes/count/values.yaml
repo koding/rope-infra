@@ -22,3 +22,12 @@ resources:
   requests:
     memory: 256Mi
     cpu: 100m
+
+# self-update to the latest release version
+keel:
+  policy: force # (all/major/minor/patch/force)
+  trigger: poll
+  pollSchedule: "@every 1m"
+  images:
+   - repository: image.repository
+     tag: image.tag
