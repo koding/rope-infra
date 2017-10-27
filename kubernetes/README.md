@@ -64,6 +64,16 @@ Installation and Upgrades:
 helm upgrade keel ./keel --install --namespace <namespace>
 ```
 
+### kube-state-metrics
+
+kube-state-metrics chart handles the exposure of state metrics of the cluster.
+
+Installation and Upgrades:
+
+```sh
+helm upgrade kube-state-metrics ./kube-state-metrics
+```
+
 ### MongoDB
 
 mongodb chart deploys [mongodb](https://www.mongodb.com/). Please see the Values.yaml file for the configuration parameters.
