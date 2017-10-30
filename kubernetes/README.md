@@ -132,3 +132,18 @@ helm fetch kubernetes-charts/mongodb --untar --destination ./kubernetes/mongodb
 helm fetch kubernetes-charts/prometheus --untar --destination ./kubernetes/prometheus
 helm fetch kubernetes-charts/redis --untar --destination ./kubernetes/redis
 helm fetch kubernetes-charts/spotify-docker-gc --untar --destination ./kubernetes/spotify-docker-gc
+
+## Steps for deployment
+
+```sh
+helm upgrade rope ./env  --install
+helm upgrade stage-redis ./redis --install --namespace rope-stage
+helm upgrade stage-mongodb ./mongodb --install --namespace rope-stage
+# create mongo user
+# update values in the charts for mongo user name and password
+
+helm upgrade --install --namespace rope-stage --set appName=counter stage-counter ./count
+helm upgrade --install --namespace rope-stage --set appName=compactor stage-compactor ./count
+
+
+```
