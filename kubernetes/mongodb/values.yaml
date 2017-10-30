@@ -12,14 +12,14 @@ image: bitnami/mongodb:3.4.9-r1
 ## MongoDB admin password
 ## ref: https://github.com/bitnami/bitnami-docker-mongodb/blob/master/README.md#setting-the-root-password-on-first-run
 ##
-# mongodbRootPassword:
+# mongodbRootPassword: minda
 
 ## MongoDB custom user and database
 ## ref: https://github.com/bitnami/bitnami-docker-mongodb/blob/master/README.md#creating-a-user-and-database-on-first-run
 ##
-# mongodbUsername:
-# mongodbPassword:
-# mongodbDatabase:
+mongodbUsername: rope_admin
+mongodbPassword: minda
+mongodbDatabase: rope
 
 ## Kubernetes service type
 serviceType: ClusterIP
