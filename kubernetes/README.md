@@ -136,14 +136,23 @@ helm fetch kubernetes-charts/spotify-docker-gc --untar --destination ./kubernete
 ## Steps for deployment
 
 ```sh
-helm upgrade rope ./env  --install
-helm upgrade stage-redis ./redis --install --namespace rope-stage
-helm upgrade stage-mongodb ./mongodb --install --namespace rope-stage
+helm upgrade --install rope ./env
+
+export ENV_PREFIX="rope"
+export ENV_SUFFIX="stage"
+export NAMESPACE=$ENV_PREFIX-$ENV_SUFFIX
+
+helm upgrade --install --namespace $NAMESPACE $ENV_SUFFIX-redis ./redis
+helm upgrade --install --namespace $NAMESPACE $ENV_SUFFIX-mongodb ./mongodb
 # create mongo user
 # update values in the charts for mongo user name and password
 
-helm upgrade --install --namespace rope-stage --set appName=counter stage-counter ./count
-helm upgrade --install --namespace rope-stage --set appName=compactor stage-compactor ./count
+export MONGODB_URL="mongodb://rope_admin:minda@stage-mongodb-mongodb:27017/rope"
+export REDIS_URL="stage-redis-redis:6379"
 
+helm upgrade --install --namespace $NAMESPACE --set appName=counter   --set mongodbURL=$MONGODB_URL --set redisURL=$REDIS_URL $ENV_SUFFIX-counter ./count
+helm upgrade --install --namespace $NAMESPACE --set appName=compactor --set mongodbURL=$MONGODB_URL --set redisURL=$REDIS_URL $ENV_SUFFIX-compactor ./count
+helm upgrade --install --namespace $NAMESPACE                         --set mongodbURL=$MONGODB_URL                           $ENV_SUFFIX-home ./home
+helm upgrade --install --namespace $NAMESPACE                                                       --set redisURL=$REDIS_URL $ENV_SUFFIX-twine ./twine
 
 ```
