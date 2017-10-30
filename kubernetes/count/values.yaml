@@ -7,8 +7,9 @@ image:
 ## 'Always' if imageTag is 'latest', else set to 'IfNotPresent'
 ## ref: http://kubernetes.io/docs/user-guide/images/#pre-pulling-images
 
-mongodbURL: mongodb://rope_admin:minda@mongodb-mongodb:27017/rope
-redisURL: redis-redis:6379
+appName: "counter"
+mongodbURL: mongodb://rope_admin:minda@stage-mongodb-mongodb:27017/rope
+redisURL: stage-redis-redis:6379
 
 ## Kubernetes service type
 serviceType: ClusterIP
