@@ -30,7 +30,7 @@ Env chart prepares the environments for the whole system. It creates staging and
 note: namespace is not required for this command
 
 ```sh
-helm upgrade rope ./env  --install
+helm upgrade --install rope ./env
 ```
 
 ### Count
@@ -40,8 +40,8 @@ Count chart deploys both "counter" and "compactor" workers. Please see the Value
 Installation and Upgrades:
 
 ```sh
-helm upgrade counter ./count --install --namespace <namespace>
-helm upgrade compactor ./count --install --namespace <namespace>
+helm upgrade --install --namespace <namespace> counter ./count
+helm upgrade --install --namespace <namespace> compactor ./count
 ```
 
 ### Home
@@ -51,7 +51,7 @@ Home chart deploys [rope-home](github.com/koding/rope-home). Please see the Valu
 Installation and Upgrades:
 
 ```sh
-helm upgrade home ./home --install --namespace <namespace>
+helm upgrade --install --namespace <namespace> home ./home
 ```
 
 ### Keel
@@ -61,7 +61,7 @@ Keel chart handles the auto update of the deployments. Please see the Values.yam
 Installation and Upgrades:
 
 ```sh
-helm upgrade keel ./keel --install --namespace <namespace>
+helm upgrade --install --namespace <namespace> keel ./keel
 ```
 
 ### kube-state-metrics
@@ -71,7 +71,7 @@ kube-state-metrics chart handles the exposure of state metrics of the cluster.
 Installation and Upgrades:
 
 ```sh
-helm upgrade kube-state-metrics ./kube-state-metrics
+helm upgrade --install --namespace <namespace> kube-state-metrics ./kube-state-metrics
 ```
 
 ### MongoDB
@@ -83,7 +83,7 @@ Installation and Upgrades:
 note: Do not forget to add namespace as a prefix, mongodb uses PVC and PVCs are not namepsaced.
 
 ```sh
-helm upgrade <namespace>-mongodb ./mongodb --install --namespace <namespace>
+helm upgrade --install --namespace <namespace> <namespace>-mongodb ./mongodb
 ```
 
 After deploying you can connect to your cluster with the following command,
@@ -115,7 +115,7 @@ Installation and Upgrades:
 note: Do not forget to add namespace as a prefix, mongodb uses PVC and PVCs are not namepsaced.
 
 ```sh
-helm upgrade <namespace>-redis ./redis --install --namespace <namespace>
+helm upgrade --install --namespace <namespace> <namespace>-redis ./redis
 ```
 
 ```sh
