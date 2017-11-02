@@ -44,6 +44,17 @@ helm upgrade --install --namespace <namespace> counter ./count
 helm upgrade --install --namespace <namespace> compactor ./count
 ```
 
+### Grafana
+
+Grafana chart grafana dashboarding system. Please see the Values.yaml file for the configuration parameters.
+
+Installation and Upgrades:
+
+```sh
+helm upgrade --install graf ./grafana
+```
+
+
 ### Home
 
 Home chart deploys [rope-home](github.com/koding/rope-home). Please see the Values.yaml file for the configuration parameters.
