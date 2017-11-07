@@ -158,3 +158,13 @@ helm upgrade --install --namespace $NAMESPACE                                   
 
 # for production change env suffix to prod
 ```
+
+### Single installations per deployment
+
+```sh
+helm upgrade --install $ENV_PREFIX  ./env
+helm upgrade --install keel         ./keel
+helm upgrade --install prom         ./prometheus
+helm upgrade --install graf         ./grafana
+```
+
