@@ -168,5 +168,5 @@ helm upgrade --install $ENV_PREFIX  ./env
 helm upgrade --install keel         ./keel
 helm upgrade --install prom         ./prometheus
 helm upgrade --install graf         ./grafana
+helm upgrade --install docker-gc    ./spotify-docker-gc
 ```
-
