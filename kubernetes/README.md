@@ -75,16 +75,6 @@ Installation and Upgrades:
 helm upgrade --install --namespace <namespace> keel ./keel
 ```
 
-### kube-state-metrics
-
-kube-state-metrics chart handles the exposure of state metrics of the cluster.
-
-Installation and Upgrades:
-
-```sh
-helm upgrade --install --namespace <namespace> kube-state-metrics ./kube-state-metrics
-```
-
 ### MongoDB
 
 mongodb chart deploys [mongodb](https://www.mongodb.com/). Please see the Values.yaml file for the configuration parameters.
@@ -138,7 +128,6 @@ kubectl run --namespace <namespace> name-redis-client --rm --tty -i --image bitn
 ### keel
 
 helm fetch kubernetes-charts/keel --untar --destination ./kubernetes/keel
-helm fetch kubernetes-charts/kube-state-metrics --untar --destination ./kubernetes/kube-state-metrics
 helm fetch kubernetes-charts/mongodb --untar --destination ./kubernetes/mongodb
 helm fetch kubernetes-charts/prometheus --untar --destination ./kubernetes/prometheus
 helm fetch kubernetes-charts/redis --untar --destination ./kubernetes/redis
