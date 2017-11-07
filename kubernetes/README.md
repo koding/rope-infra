@@ -125,15 +125,17 @@ kubectl run --namespace <namespace> name-redis-client --rm --tty -i --image bitn
 
 ## Chart Version Upgrades
 
-### keel
-
+```sh
 helm fetch kubernetes-charts/keel --untar --destination ./kubernetes/keel
 helm fetch kubernetes-charts/mongodb --untar --destination ./kubernetes/mongodb
 helm fetch kubernetes-charts/prometheus --untar --destination ./kubernetes/prometheus
 helm fetch kubernetes-charts/redis --untar --destination ./kubernetes/redis
 helm fetch kubernetes-charts/spotify-docker-gc --untar --destination ./kubernetes/spotify-docker-gc
+```
 
 ## Steps for deployment
+
+### Multi env installations
 
 ```sh
 helm init
@@ -145,10 +147,10 @@ export NAMESPACE=$ENV_PREFIX-$ENV_SUFFIX
 export MONGODBUSERNAME="rope_admin"
 export MONGODBPASSWORD="minda"
 export MONGODBDATABASE="rope"
-export MONGODB_URL="mongodb://$MONGODBUSERNAME:$MONGODBPASSWORD@stage-mongodb-mongodb:27017/$MONGODBDATABASE"
-export REDIS_URL="stage-redis-redis:6379"
+export MONGODB_URL="mongodb://$MONGODBUSERNAME:$MONGODBPASSWORD@$ENV_SUFFIX-mongodb-mongodb:27017/$MONGODBDATABASE"
+export REDIS_URL="$ENV_SUFFIX-redis-redis:6379"
 
-helm upgrade --install                                                                                                                                             $ENV_PREFIX ./env
+
 helm upgrade --install --namespace $NAMESPACE                                                                                                                      $ENV_SUFFIX-redis ./redis
 helm upgrade --install --namespace $NAMESPACE --set mongodbUsername=$MONGODBUSERNAME --set mongodbPassword=$MONGODBPASSWORD --set mongodbDatabase=$MONGODBDATABASE $ENV_SUFFIX-mongodb ./mongodb
 helm upgrade --install --namespace $NAMESPACE --set appName=counter   --set mongodbURL=$MONGODB_URL --set redisURL=$REDIS_URL                                      $ENV_SUFFIX-counter ./count
