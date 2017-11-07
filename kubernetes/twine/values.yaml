@@ -25,7 +25,7 @@ resources:
 
 # self-update to the latest release version
 keel:
-  policy: force # (all/major/minor/patch/force)
+  policy: all # (all/major/minor/patch/force)
   trigger: poll
   approvals: 0
   pollSchedule: "@every 1m"
