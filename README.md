@@ -1,7 +1,8 @@
 # rope-infra
 
-Infra for rope systems.
+[![CircleCI](https://circleci.com/gh/koding/rope-infra/tree/master.svg?style=svg&circle-token=1e8d2ffb37bddb5ad2085d46700fe7263e9a419c)](https://circleci.com/gh/koding/rope-infra/tree/master)
 
+Infra for rope systems.
 
 ## Kubernetes
 
