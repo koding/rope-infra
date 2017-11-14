@@ -54,7 +54,6 @@ Installation and Upgrades:
 helm upgrade --install graf ./grafana
 ```
 
-
 ### Home
 
 Home chart deploys [rope-home](github.com/koding/rope-home). Please see the Values.yaml file for the configuration parameters.
@@ -126,11 +125,13 @@ kubectl run --namespace <namespace> name-redis-client --rm --tty -i --image bitn
 ## Chart Version Upgrades
 
 ```sh
-helm fetch kubernetes-charts/keel --untar --destination ./kubernetes/keel
-helm fetch kubernetes-charts/mongodb --untar --destination ./kubernetes/mongodb
-helm fetch kubernetes-charts/prometheus --untar --destination ./kubernetes/prometheus
-helm fetch kubernetes-charts/redis --untar --destination ./kubernetes/redis
-helm fetch kubernetes-charts/spotify-docker-gc --untar --destination ./kubernetes/spotify-docker-gc
+helm fetch stable/keel --untar --destination ./kubernetes/keel
+helm fetch stable/mongodb --untar --destination ./kubernetes/mongodb
+helm fetch stable/prometheus --untar --destination ./kubernetes/prometheus
+helm fetch stable/redis --untar --destination ./kubernetes/redis
+helm fetch stable/spotify-docker-gc --untar --destination ./kubernetes/spotify-docker-gc
+helm fetch stable/nginx-ingress --untar --destination ./kubernetes/nginx-ingress
+helm fetch stable/kube-lego --untar --destination ./kubernetes/kube-lego
 ```
 
 ## Steps for deployment
