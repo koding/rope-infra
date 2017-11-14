@@ -13,7 +13,7 @@ githubClientSecret: secret
 sessionSecret: session_secret
 
 ## Kubernetes service type
-serviceType: ClusterIP
+serviceType: NodePort
 
 port: 9000
 

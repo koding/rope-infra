@@ -12,7 +12,7 @@ mongodbURL: mongodb://rope_admin:minda@stage-mongodb-mongodb:27017/rope
 redisURL: stage-redis-redis:6379
 
 ## Kubernetes service type
-serviceType: ClusterIP
+serviceType: NodePort
 
 port: 8080
 

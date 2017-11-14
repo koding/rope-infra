@@ -11,7 +11,7 @@ redisURL: redis://redis-redis:6379
 secret: "my_super_awesome_secret"
 
 ## Kubernetes service type
-serviceType: ClusterIP
+serviceType: NodePort
 
 port: 4000
 
