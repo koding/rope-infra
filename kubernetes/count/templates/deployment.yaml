@@ -18,7 +18,7 @@ spec:
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
           imagePullPolicy: {{ default "" .Values.image.pullPolicy | quote }}
           command:
-            - "/go/bin/{{ .Values.appName }}" 
+            - "/go/bin/{{ required "appName is required!" .Values.appName }}" 
           env:
             - name: MONGO_URL
               valueFrom:
