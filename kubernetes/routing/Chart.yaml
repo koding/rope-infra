@@ -1,0 +1,10 @@
+version: 0.1
+name: routing
+description: routing chart handles the required routing for the rope env.
+home: https://rope.live
+keywords:
+- nginx
+- ingress
+maintainers:
+- email: cihangir@koding.com
+  name: Cihangir Savas

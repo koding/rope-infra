@@ -1,0 +1,3 @@
+baseDomain: "savas.io"
+envName: "stage" 
+ingressClass: "gce"

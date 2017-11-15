@@ -1,0 +1,54 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: rope-ingress-{{ required "A valid envName is required!" .Values.envName }}
+  annotations:
+    kubernetes.io/tls-acme: "true"
+    kubernetes.io/ingress.class: "{{ .Values.ingressClass }}"
+spec:
+  rules:
+    - host: twine-twine.{{ template "env.domainSuffix" . }}
+      http:
+        paths:
+          - backend:
+              serviceName: {{ .Values.envName }}-twine-twine
+              servicePort: 4000
+            path: /*
+  
+    - host: home-home.{{ template "env.domainSuffix" . }}
+      http:
+        paths:
+          - backend:
+              serviceName: {{ .Values.envName }}-home-home
+              servicePort: 9000
+            path: /*
+
+    - host: compactor-count.{{ template "env.domainSuffix" . }}
+      http:
+        paths:
+          - backend:
+              serviceName: {{ .Values.envName }}-compactor-count
+              servicePort: 9080
+            path: /*
+
+    - host: counter-count.{{ template "env.domainSuffix" . }}
+      http:
+        paths:
+          - backend:
+              serviceName: {{ .Values.envName }}-counter-count
+              servicePort: 9080
+            path: /*         
+
+
+
+    # This section is only required if TLS is to be enabled for the Ingress
+  # tls:
+  #   # With this configuration kube-lego will generate a secret in namespace foo called `example-tls`
+  #   # for the URL `www.example.com`
+  #   - hosts:
+  #       - "twine-twine.{{ template "env.domainSuffix" . }}"  
+  #       - "home-home.{{ template "env.domainSuffix" . }}"
+  #       - "compactor-count.{{ template "env.domainSuffix" . }}"
+  #       - "counter-count.{{ template "env.domainSuffix" . }}"
+
+  #     secretName: {{ .Values.envName }}-twine-tls
