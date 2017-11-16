@@ -158,6 +158,7 @@ helm upgrade --install --namespace $NAMESPACE --set appName=counter   --set mong
 helm upgrade --install --namespace $NAMESPACE --set appName=compactor --set mongodbURL=$MONGODB_URL --set redisURL=$REDIS_URL                                      $ENV_SUFFIX-compactor ./count
 helm upgrade --install --namespace $NAMESPACE                         --set mongodbURL=$MONGODB_URL                                                                $ENV_SUFFIX-home ./home
 helm upgrade --install --namespace $NAMESPACE                                                       --set redisURL="redis://$REDIS_URL"                            $ENV_SUFFIX-twine ./twine
+helm upgrade --install --namespace $NAMESPACE --set envName=$ENV_SUFFIX                                                                                            $ENV_SUFFIX-routing  ./routing
 
 # for production change env suffix to prod
 ```
