@@ -166,9 +166,11 @@ helm upgrade --install --namespace $NAMESPACE --set envName=$ENV_SUFFIX         
 ### Single installations per deployment
 
 ```sh
-helm upgrade --install $ENV_PREFIX  ./env
-helm upgrade --install keel         ./keel
-helm upgrade --install prom         ./prometheus
-helm upgrade --install graf         ./grafana
-helm upgrade --install docker-gc    ./spotify-docker-gc
+helm upgrade --install                            $ENV_PREFIX    ./env
+helm upgrade --install                            keel           ./keel
+helm upgrade --install                            prom           ./prometheus
+helm upgrade --install                            graf           ./grafana
+helm upgrade --install                            docker-gc      ./spotify-docker-gc
+helm upgrade --install --namespace  nginx-ingress nginx-ingress  ./nginx-ingress
+# helm upgrade --install --namespace  routing       kube-lego      ./kube-lego
 ```
