@@ -13,7 +13,7 @@ spec:
           - backend:
               serviceName: {{ .Values.envName }}-twine-twine
               servicePort: 4000
-            path: /*
+            path: /
   
     - host: home-home.{{ template "env.domainSuffix" . }}
       http:
@@ -21,7 +21,7 @@ spec:
           - backend:
               serviceName: {{ .Values.envName }}-home-home
               servicePort: 9000
-            path: /*
+            path: /
 
     - host: compactor-count.{{ template "env.domainSuffix" . }}
       http:
@@ -29,7 +29,7 @@ spec:
           - backend:
               serviceName: {{ .Values.envName }}-compactor-count
               servicePort: 9080
-            path: /*
+            path: /
 
     - host: counter-count.{{ template "env.domainSuffix" . }}
       http:
@@ -37,7 +37,7 @@ spec:
           - backend:
               serviceName: {{ .Values.envName }}-counter-count
               servicePort: 9080
-            path: /*         
+            path: /         
 
   #   # This section is only required if TLS is to be enabled for the Ingress
   # tls:
