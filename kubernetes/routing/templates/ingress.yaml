@@ -39,16 +39,11 @@ spec:
               servicePort: 9080
             path: /*         
 
-
-
-    # This section is only required if TLS is to be enabled for the Ingress
+  #   # This section is only required if TLS is to be enabled for the Ingress
   # tls:
-  #   # With this configuration kube-lego will generate a secret in namespace foo called `example-tls`
-  #   # for the URL `www.example.com`
-  #   - hosts:
+  #   - secretName: {{ .Values.envName }}-twine-tls
+  #     hosts:
   #       - "twine-twine.{{ template "env.domainSuffix" . }}"  
   #       - "home-home.{{ template "env.domainSuffix" . }}"
   #       - "compactor-count.{{ template "env.domainSuffix" . }}"
   #       - "counter-count.{{ template "env.domainSuffix" . }}"
-
-  #     secretName: {{ .Values.envName }}-twine-tls
