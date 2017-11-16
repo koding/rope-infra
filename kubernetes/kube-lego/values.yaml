@@ -31,6 +31,8 @@ config:
   ##
   # LEGO_DEFAULT_INGRESS_CLASS: nginx
 
+  LEGO_LOG_LEVEL: "debug"
+
 ## kube-lego image
 ##
 image:
