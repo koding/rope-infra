@@ -27,11 +27,87 @@ helm --help
 
 Env chart prepares the environments for the whole system. It creates staging and production namespaces respectively
 
-note: namespace is not required for this command
-
 ```sh
 helm upgrade --install rope ./env
 ```
+
+Notes:
+
+* namespace is not required for this command
+* one time command per project
+
+### Grafana
+
+Grafana chart is the "grafana" dashboarding system. Please see the Values.yaml file for the configuration parameters.
+
+Installation and Upgrades:
+
+```sh
+helm upgrade --install graf ./grafana
+```
+
+Notes:
+
+* namespace is not required for this command
+* one time command per project
+
+### Keel
+
+Keel chart handles the auto update of the deployments. Please see the Values.yaml file for the configuration parameters.
+
+Installation and Upgrades:
+
+```sh
+helm upgrade --install --namespace <namespace> keel ./keel
+```
+
+Notes:
+
+* namespace should be a system namespace
+* one time command per project
+
+### Nginx Ingress
+
+Nginx Ingress chart handles the auto routing/discovery for the backend services. Given the services and Ingress pairs, this ingress controller creates *a* load balancer and routes all the traffice from that endpoint into the internal ingresses. Please see the Values.yaml file for the configuration parameters.
+
+Installation and Upgrades:
+
+```sh
+helm upgrade --install --namespace nginx-ingress nginx-ingress ./nginx-ingress
+```
+
+Notes:
+
+* namespace should be nginx-ingress namespace
+* one time command per project
+
+### Prometheus
+
+Prometheus is the cloud native monitoring and metrics system where most the kubernetes related projects has built-in support for it. Please see the Values.yaml file for the configuration parameters.
+
+Installation and Upgrades:
+
+```sh
+helm upgrade --install prom ./prometheus
+```
+
+Notes:
+
+* one time command per project
+
+### Docker GC
+
+Spotify docker GC chart removes the unused images from the system, basically handles the GC. Please see the Values.yaml file for the configuration parameters.
+
+Installation and Upgrades:
+
+```sh
+helm upgrade --install docker-gc ./spotify-docker-gc
+```
+
+Notes:
+
+* one time command per project
 
 ### Count
 
@@ -44,19 +120,14 @@ helm upgrade --install --namespace <namespace> counter ./count
 helm upgrade --install --namespace <namespace> compactor ./count
 ```
 
-### Grafana
+Notes:
 
-Grafana chart grafana dashboarding system. Please see the Values.yaml file for the configuration parameters.
-
-Installation and Upgrades:
-
-```sh
-helm upgrade --install graf ./grafana
-```
+* namespace is *required* for this command
+* required per separate environments
 
 ### Home
 
-Home chart deploys [rope-home](github.com/koding/rope-home). Please see the Values.yaml file for the configuration parameters.
+Home chart deploys [home](github.com/ropelive/home). Please see the Values.yaml file for the configuration parameters.
 
 Installation and Upgrades:
 
@@ -64,15 +135,10 @@ Installation and Upgrades:
 helm upgrade --install --namespace <namespace> home ./home
 ```
 
-### Keel
+Notes:
 
-Keel chart handles the auto update of the deployments. Please see the Values.yaml file for the configuration parameters.
-
-Installation and Upgrades:
-
-```sh
-helm upgrade --install --namespace <namespace> keel ./keel
-```
+* namespace is *required* for this command
+* required per separate environments
 
 ### MongoDB
 
@@ -106,6 +172,11 @@ db.createUser(
 )
 ```
 
+Notes:
+
+* namespace is *required* for this command
+* required per separate environments
+
 ### Redis
 
 redis chart installs a redis server.
@@ -121,6 +192,11 @@ helm upgrade --install --namespace <namespace> <namespace>-redis ./redis
 ```sh
 kubectl run --namespace <namespace> name-redis-client --rm --tty -i --image bitnami/redis:3.2.9-r2 -- bash
 ```
+
+Notes:
+
+* namespace is *required* for this command
+* required per separate environments
 
 ## Chart Version Upgrades
 
