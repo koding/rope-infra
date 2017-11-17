@@ -31,6 +31,14 @@ spec:
               servicePort: 3210
             path: /
 
+    - host: rest-rest.{{ template "env.domainSuffix" . }}
+      http:
+        paths:
+          - backend:
+              serviceName: {{ .Values.envName }}-rest-rest
+              servicePort: 3435
+            path: /
+
     - host: compactor-count.{{ template "env.domainSuffix" . }}
       http:
         paths:
@@ -54,5 +62,6 @@ spec:
   #       - "twine-twine.{{ template "env.domainSuffix" . }}"  
   #       - "home-home.{{ template "env.domainSuffix" . }}"
   #       - "server-server.{{ template "env.domainSuffix" . }}"
+  #       - "rest-rest.{{ template "env.domainSuffix" . }}"
   #       - "compactor-count.{{ template "env.domainSuffix" . }}"
   #       - "counter-count.{{ template "env.domainSuffix" . }}"

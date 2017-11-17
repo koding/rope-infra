@@ -1,0 +1,32 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: {{ template "rest.fullname" . }}
+  labels:
+    app: {{ template "rest.fullname" . }}
+    chart: "{{ .Chart.Name }}-{{ .Chart.Version }}"
+    release: "{{ .Release.Name }}"
+    heritage: "{{ .Release.Service }}"
+spec:
+  template:
+    metadata:
+      labels:
+        app: {{ template "rest.fullname" . }}
+    spec:
+      containers:
+        - name: {{ template "rest.fullname" . }}
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+          imagePullPolicy: {{ default "" .Values.image.pullPolicy | quote }}
+          command:
+            - "npm"
+            - "start"
+          env:
+            - name: REST_PORT
+              value: "{{ .Values.port }}"
+            - name: REST_TIMEOUT
+              value: "{{ .Values.timeout }}"
+          ports:
+            - name: http
+              containerPort: {{ .Values.port }}
+          resources:
+{{ toYaml .Values.resources | indent 12 }}

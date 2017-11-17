@@ -1,0 +1,10 @@
+version: 0.1
+name: rest
+description: Rope rest server.
+home: https://rope.live
+keywords:
+- rope
+- rest
+maintainers:
+- email: gokmen@koding.com
+  name: Gokmen Goksel
