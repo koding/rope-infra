@@ -200,6 +200,8 @@ Notes:
 
 ## Chart Version Upgrades
 
+Please note that the Values.yaml files might have been changed to satisfy our needs. Merge the changes according to new requirements and push accordingly.
+
 ```sh
 helm fetch stable/keel --untar --destination ./kubernetes/keel
 helm fetch stable/mongodb --untar --destination ./kubernetes/mongodb
@@ -207,7 +209,6 @@ helm fetch stable/prometheus --untar --destination ./kubernetes/prometheus
 helm fetch stable/redis --untar --destination ./kubernetes/redis
 helm fetch stable/spotify-docker-gc --untar --destination ./kubernetes/spotify-docker-gc
 helm fetch stable/nginx-ingress --untar --destination ./kubernetes/nginx-ingress
-helm fetch stable/kube-lego --untar --destination ./kubernetes/kube-lego
 ```
 
 ## Steps for deployment
@@ -251,5 +252,4 @@ helm upgrade --install                            prom           ./prometheus
 helm upgrade --install                            graf           ./grafana
 helm upgrade --install                            docker-gc      ./spotify-docker-gc
 helm upgrade --install --namespace  nginx-ingress nginx-ingress  ./nginx-ingress
-# helm upgrade --install --namespace  routing       kube-lego      ./kube-lego
 ```
