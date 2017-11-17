@@ -140,6 +140,66 @@ Notes:
 * namespace is *required* for this command
 * required per separate environments
 
+### Rest
+
+Rest chart deploys [rest](github.com/ropelive/rest). Please see the Values.yaml file for the configuration parameters.
+
+Installation and Upgrades:
+
+```sh
+helm upgrade --install --namespace <namespace> rest ./rest
+```
+
+Notes:
+
+* namespace is *required* for this command
+* required per separate environments
+
+### Routing
+
+Routing chart deploys the ingress configuration for rope system. Please see the Values.yaml file for the configuration parameters.
+
+Installation and Upgrades:
+
+```sh
+helm upgrade --install --namespace <namespace> routing ./routing
+```
+
+Notes:
+
+* namespace is *required* for this command
+* required per separate environments
+
+### Server
+
+server chart deploys [server](github.com/ropelive/server). Please see the Values.yaml file for the configuration parameters.
+
+Installation and Upgrades:
+
+```sh
+helm upgrade --install --namespace <namespace> server ./server
+```
+
+Notes:
+
+* namespace is *required* for this command
+* required per separate environments
+
+### Twine
+
+Twine chart deploys [twine](github.com/ropelive/twine). Please see the Values.yaml file for the configuration parameters.
+
+Installation and Upgrades:
+
+```sh
+helm upgrade --install --namespace <namespace> twine ./twine
+```
+
+Notes:
+
+* namespace is *required* for this command
+* required per separate environments
+
 ### MongoDB
 
 mongodb chart deploys [mongodb](https://www.mongodb.com/). Please see the Values.yaml file for the configuration parameters.
