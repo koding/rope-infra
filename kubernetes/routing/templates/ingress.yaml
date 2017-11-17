@@ -23,6 +23,14 @@ spec:
               servicePort: 9000
             path: /
 
+    - host: server-server.{{ template "env.domainSuffix" . }}
+      http:
+        paths:
+          - backend:
+              serviceName: {{ .Values.envName }}-server-server
+              servicePort: 3210
+            path: /
+
     - host: compactor-count.{{ template "env.domainSuffix" . }}
       http:
         paths:
@@ -45,5 +53,6 @@ spec:
   #     hosts:
   #       - "twine-twine.{{ template "env.domainSuffix" . }}"  
   #       - "home-home.{{ template "env.domainSuffix" . }}"
+  #       - "server-server.{{ template "env.domainSuffix" . }}"
   #       - "compactor-count.{{ template "env.domainSuffix" . }}"
   #       - "counter-count.{{ template "env.domainSuffix" . }}"
