@@ -11,4 +11,4 @@ sources:
 - https://github.com/prometheus/prometheus
 - https://github.com/prometheus/pushgateway
 - https://github.com/kubernetes/kube-state-metrics
-version: 4.6.6
+version: 4.6.11
