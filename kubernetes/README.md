@@ -142,7 +142,7 @@ helm fetch stable/kube-lego --untar --destination ./kubernetes/kube-lego
 helm init
 
 export ENV_PREFIX="rope"
-export ENV_SUFFIX="stage"
+export ENV_SUFFIX="stage" # for production change env suffix to prod
 export NAMESPACE=$ENV_PREFIX-$ENV_SUFFIX
 
 export MONGODBUSERNAME="rope_admin"
@@ -151,16 +151,18 @@ export MONGODBDATABASE="rope"
 export MONGODB_URL="mongodb://$MONGODBUSERNAME:$MONGODBPASSWORD@$ENV_SUFFIX-mongodb-mongodb:27017/$MONGODBDATABASE"
 export REDIS_URL="$ENV_SUFFIX-redis-redis:6379"
 
-
+# service components
 helm upgrade --install --namespace $NAMESPACE                                                                                                                      $ENV_SUFFIX-redis ./redis
 helm upgrade --install --namespace $NAMESPACE --set mongodbUsername=$MONGODBUSERNAME --set mongodbPassword=$MONGODBPASSWORD --set mongodbDatabase=$MONGODBDATABASE $ENV_SUFFIX-mongodb ./mongodb
+# accounting components
 helm upgrade --install --namespace $NAMESPACE --set appName=counter   --set mongodbURL=$MONGODB_URL --set redisURL=$REDIS_URL                                      $ENV_SUFFIX-counter ./count
 helm upgrade --install --namespace $NAMESPACE --set appName=compactor --set mongodbURL=$MONGODB_URL --set redisURL=$REDIS_URL                                      $ENV_SUFFIX-compactor ./count
+# rope components
 helm upgrade --install --namespace $NAMESPACE                         --set mongodbURL=$MONGODB_URL                                                                $ENV_SUFFIX-home ./home
 helm upgrade --install --namespace $NAMESPACE                                                       --set redisURL="redis://$REDIS_URL"                            $ENV_SUFFIX-twine ./twine
+helm upgrade --install --namespace $NAMESPACE                                                                                                                      $ENV_SUFFIX-server ./server
+# routing components
 helm upgrade --install --namespace $NAMESPACE --set envName=$ENV_SUFFIX                                                                                            $ENV_SUFFIX-routing  ./routing
-
-# for production change env suffix to prod
 ```
 
 ### Single installations per deployment
