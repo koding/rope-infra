@@ -1,0 +1,30 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: {{ template "server.fullname" . }}
+  labels:
+    app: {{ template "server.fullname" . }}
+    chart: "{{ .Chart.Name }}-{{ .Chart.Version }}"
+    release: "{{ .Release.Name }}"
+    heritage: "{{ .Release.Service }}"
+spec:
+  template:
+    metadata:
+      labels:
+        app: {{ template "server.fullname" . }}
+    spec:
+      containers:
+        - name: {{ template "server.fullname" . }}
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+          imagePullPolicy: {{ default "" .Values.image.pullPolicy | quote }}
+          command:
+            - "npm"
+            - "start"
+          env:
+            - name: ROPE_PORT
+              value: "{{ .Values.port }}"
+          ports:
+            - name: http
+              containerPort: {{ .Values.port }}
+          resources:
+{{ toYaml .Values.resources | indent 12 }}

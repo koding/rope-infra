@@ -1,0 +1,9 @@
+version: 0.1
+name: server
+description: Rope server for Node.js.
+home: https://rope.live
+keywords:
+- rope
+maintainers:
+- email: gokmen@koding.com
+  name: Gokmen Goksel
