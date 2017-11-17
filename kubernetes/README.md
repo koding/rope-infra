@@ -263,12 +263,14 @@ Notes:
 Please note that the Values.yaml files might have been changed to satisfy our needs. Merge the changes according to new requirements and push accordingly.
 
 ```sh
-helm fetch stable/keel --untar --destination ./kubernetes/keel
-helm fetch stable/mongodb --untar --destination ./kubernetes/mongodb
-helm fetch stable/prometheus --untar --destination ./kubernetes/prometheus
-helm fetch stable/redis --untar --destination ./kubernetes/redis
-helm fetch stable/spotify-docker-gc --untar --destination ./kubernetes/spotify-docker-gc
-helm fetch stable/nginx-ingress --untar --destination ./kubernetes/nginx-ingress
+# last update to all of them at 2017-11-17 
+helm fetch stable/grafana --untar --destination ./kubernetes
+helm fetch stable/keel --untar --destination ./kubernetes
+helm fetch stable/mongodb --untar --destination ./kubernetes
+helm fetch stable/nginx-ingress --untar --destination ./kubernetes
+helm fetch stable/prometheus --untar --destination ./kubernetes
+helm fetch stable/redis --untar --destination ./kubernetes
+helm fetch stable/spotify-docker-gc --untar --destination ./kubernetes
 ```
 
 ## Steps for deployment
