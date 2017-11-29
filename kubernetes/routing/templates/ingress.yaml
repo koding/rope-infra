@@ -1,7 +1,7 @@
 apiVersion: extensions/v1beta1
 kind: Ingress
 metadata:
-  name: rope-ingress-{{ required "A valid envName is required!" .Values.envName }}
+  name: rope-ingress-{{ required "A valid envName is required!" .Values.envName }}-{{ .Values.baseDomain | replace "." "-" }}
   annotations:
     kubernetes.io/tls-acme: "true"
     kubernetes.io/ingress.class: "{{ .Values.ingressClass }}"
@@ -55,13 +55,13 @@ spec:
               servicePort: 9080
             path: /         
 
-  #   # This section is only required if TLS is to be enabled for the Ingress
-  # tls:
-  #   - secretName: {{ .Values.envName }}-twine-tls
-  #     hosts:
-  #       - "twine-twine.{{ template "env.domainSuffix" . }}"  
-  #       - "home-home.{{ template "env.domainSuffix" . }}"
-  #       - "server-server.{{ template "env.domainSuffix" . }}"
-  #       - "rest-rest.{{ template "env.domainSuffix" . }}"
-  #       - "compactor-count.{{ template "env.domainSuffix" . }}"
-  #       - "counter-count.{{ template "env.domainSuffix" . }}"
+    # This section is only required if TLS is to be enabled for the Ingress
+  tls:
+    - secretName: {{ .Values.envName }}-rope-tls
+      hosts:
+        - "twine-twine.{{ template "env.domainSuffix" . }}"  
+        - "home-home.{{ template "env.domainSuffix" . }}"
+        - "server-server.{{ template "env.domainSuffix" . }}"
+        - "rest-rest.{{ template "env.domainSuffix" . }}"
+        - "compactor-count.{{ template "env.domainSuffix" . }}"
+        - "counter-count.{{ template "env.domainSuffix" . }}"

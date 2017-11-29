@@ -10,5 +10,5 @@
 {{- end -}}
 
 {{- define "env.domainSuffix" -}}
-{{- printf "%s.rope.%s" .Values.envName .Values.baseDomain -}}
+{{- printf "%s.%s" .Values.envName .Values.baseDomain -}}
 {{- end -}}
