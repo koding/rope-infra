@@ -298,6 +298,8 @@ helm init
 export ENV_PREFIX="rope"
 export ENV_SUFFIX="stage" # for production change env suffix to prod
 export NAMESPACE=$ENV_PREFIX-$ENV_SUFFIX
+export BASE_DOMAIN="p.rope.live"
+export ROUTING_DEPLOY_NAME=$ENV_SUFFIX-${BASE_DOMAIN//./-}-routing
 
 export MONGODBUSERNAME="rope_admin"
 export MONGODBPASSWORD="minda"
@@ -318,6 +320,7 @@ helm upgrade --install --namespace $NAMESPACE                                   
 helm upgrade --install --namespace $NAMESPACE                                                                                                                      $ENV_SUFFIX-rest ./rest
 # routing components
 helm upgrade --install --namespace $NAMESPACE --set envName=$ENV_SUFFIX                                                                                            $ENV_SUFFIX-routing  ./routing
+helm upgrade --install --namespace $NAMESPACE --set envName=$ENV_SUFFIX  --set baseDomain=$BASE_DOMAIN                                                             $ROUTING_DEPLOY_NAME  ./routing
 ```
 
 ### Single installations per deployment
