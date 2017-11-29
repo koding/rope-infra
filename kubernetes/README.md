@@ -285,6 +285,7 @@ helm fetch stable/nginx-ingress --untar --destination ./kubernetes
 helm fetch stable/prometheus --untar --destination ./kubernetes
 helm fetch stable/redis --untar --destination ./kubernetes
 helm fetch stable/spotify-docker-gc --untar --destination ./kubernetes
+helm fetch stable/kube-lego --untar --destination ./kubernetes/kube-lego
 ```
 
 ## Steps for deployment
@@ -328,4 +329,5 @@ helm upgrade --install                            prom           ./prometheus
 helm upgrade --install                            graf           ./grafana
 helm upgrade --install                            docker-gc      ./spotify-docker-gc
 helm upgrade --install --namespace  nginx-ingress nginx-ingress  ./nginx-ingress
+helm upgrade --install --namespace  routing       kube-lego      ./kube-lego
 ```
