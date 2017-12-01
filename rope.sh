@@ -68,6 +68,28 @@ function validate-repo-path() {
 	fi
 }
 
-validate-repo-name "$1"
-validate-repo-path "$1"
-git-tag "$1"
+if [ "$1" == "upgrade" ]; then
+	shift
+
+	validate-repo-name "$1"
+	validate-repo-path "$1"
+	git-tag "$1"
+
+elif [ "$1" == "validate-image-tags" ]; then
+	failed="false"
+	for i in "${repos[@]}"; do
+		if [ $i != "infra" ]; then
+			version=$(./yaml-parser.sh ./kubernetes/"$i"/values.yaml image_tag)
+			tag=$(curl --silent "https://hub.docker.com/v2/repositories/ropelive/"$i"/tags/?page_size=1" | jq -r '.results|.[]|.name')
+			echo "repo: $i $version $tag"
+			if [[ "$version" != "$tag" ]]; then
+				failed="true"
+				echo "Error: version mismatch: current version in values: $version and dockerhub tag: $tag are not same for $i"
+			fi
+		fi
+	done
+	[[ "$failed" == "false" ]] || exit 1
+
+else
+	echo "Error: usage yaml-parser.sh <filename?> <key?>"
+fi
