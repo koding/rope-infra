@@ -1,6 +1,6 @@
 image:
-  repository: ropelive/countbase
-  tag: 1.0.3
+  repository: ropelive/count
+  tag: 1.0.10
   pullPolicy: IfNotPresent
 
 ## Specify a imagePullPolicy
