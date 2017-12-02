@@ -43,6 +43,8 @@ spec:
                   key: session-secret
             - name: PORT_SERVER
               value: "{{ .Values.port }}"
+            - name: ROPE_SERVER
+              value: {{ template "home.ropeServer" . }}
           ports:
             - name: http
               containerPort: {{ .Values.port }}

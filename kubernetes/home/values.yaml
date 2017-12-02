@@ -17,6 +17,9 @@ serviceType: NodePort
 
 port: 9000
 
+baseDomain: "rope.savas.io"
+envName: "stage"
+
 ## Configure resource requests and limits
 ## ref: http://kubernetes.io/docs/user-guide/compute-resources/
 ##
