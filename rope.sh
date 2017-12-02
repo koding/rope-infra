@@ -1,5 +1,8 @@
 #!/bin/bash
 
+#  make relative paths work.
+pushd "$(dirname "$0")"
+
 function git-tag() {
 	repo=$1
 	repo_dir=$(get-repo-path "$repo")
@@ -68,14 +71,7 @@ function validate-repo-path() {
 	fi
 }
 
-if [ "$1" == "upgrade" ]; then
-	shift
-
-	validate-repo-name "$1"
-	validate-repo-path "$1"
-	git-tag "$1"
-
-elif [ "$1" == "validate-image-tags" ]; then
+function validate-image-tags() {
 	failed="false"
 	for i in "${repos[@]}"; do
 		if [ $i != "infra" ]; then
@@ -89,7 +85,23 @@ elif [ "$1" == "validate-image-tags" ]; then
 		fi
 	done
 	[[ "$failed" == "false" ]] || exit 1
+}
 
+if [ "$1" == "upgrade" ]; then
+	shift
+
+	validate-repo-name "$1"
+	validate-repo-path "$1"
+	git-tag "$1"
+
+elif [ "$1" == "helm" ]; then
+	validate-image-tags
+
+	shift
+	./kubernetes/helm.sh "$@"
+
+elif [ "$1" == "validate-image-tags" ]; then
+	validate-image-tags
 else
 	echo "Error: usage yaml-parser.sh <filename?> <key?>"
 fi
