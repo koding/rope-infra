@@ -8,6 +8,7 @@ metadata:
     release: "{{ .Release.Name }}"
     heritage: "{{ .Release.Service }}"
 spec:
+  revisionHistoryLimit: {{ default "3" .Values.revisionHistoryLimit }}
   template:
     metadata:
       labels:
