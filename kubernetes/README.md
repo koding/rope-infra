@@ -318,45 +318,8 @@ helm fetch stable/kube-lego --untar --destination ./kubernetes/kube-lego
 
 ### Multi env installations
 
-```sh
-helm init
-
-export ENV_PREFIX="rope"
-export ENV_SUFFIX="stage" # for production change env suffix to prod
-export NAMESPACE=$ENV_PREFIX-$ENV_SUFFIX
-export BASE_DOMAIN="p.rope.live"
-export ROUTING_DEPLOY_NAME=$ENV_SUFFIX-${BASE_DOMAIN//./-}-routing
-
-export MONGODBUSERNAME="rope_admin"
-export MONGODBPASSWORD="minda"
-export MONGODBDATABASE="rope"
-export MONGODB_URL="mongodb://$MONGODBUSERNAME:$MONGODBPASSWORD@$ENV_SUFFIX-mongodb-mongodb:27017/$MONGODBDATABASE"
-export REDIS_URL="$ENV_SUFFIX-redis-redis:6379"
-
-# service components
-helm upgrade --install --namespace $NAMESPACE                                                                                                                      $ENV_SUFFIX-redis ./redis
-helm upgrade --install --namespace $NAMESPACE --set mongodbUsername=$MONGODBUSERNAME --set mongodbPassword=$MONGODBPASSWORD --set mongodbDatabase=$MONGODBDATABASE $ENV_SUFFIX-mongodb ./mongodb
-# accounting components
-helm upgrade --install --namespace $NAMESPACE --set appName=counter   --set mongodbURL=$MONGODB_URL --set redisURL=$REDIS_URL                                      $ENV_SUFFIX-counter ./count
-helm upgrade --install --namespace $NAMESPACE --set appName=compactor --set mongodbURL=$MONGODB_URL --set redisURL=$REDIS_URL                                      $ENV_SUFFIX-compactor ./count
-# rope components
-helm upgrade --install --namespace $NAMESPACE                         --set mongodbURL=$MONGODB_URL                                                                $ENV_SUFFIX-home ./home
-helm upgrade --install --namespace $NAMESPACE                                                       --set redisURL="redis://$REDIS_URL"                            $ENV_SUFFIX-twine ./twine
-helm upgrade --install --namespace $NAMESPACE                                                                                                                      $ENV_SUFFIX-server ./server
-helm upgrade --install --namespace $NAMESPACE                                                                                                                      $ENV_SUFFIX-rest ./rest
-# routing components
-helm upgrade --install --namespace $NAMESPACE --set envName=$ENV_SUFFIX                                                                                            $ENV_SUFFIX-routing  ./routing
-helm upgrade --install --namespace $NAMESPACE --set envName=$ENV_SUFFIX  --set baseDomain=$BASE_DOMAIN                                                             $ROUTING_DEPLOY_NAME  ./routing
-```
+Please see helm.sh for further info.
 
 ### Single installations per deployment
 
-```sh
-helm upgrade --install                            $ENV_PREFIX    ./env
-helm upgrade --install                            keel           ./keel
-helm upgrade --install                            prom           ./prometheus
-helm upgrade --install                            graf           ./grafana
-helm upgrade --install                            docker-gc      ./spotify-docker-gc
-helm upgrade --install --namespace  nginx-ingress nginx-ingress  ./nginx-ingress
-helm upgrade --install --namespace  routing       kube-lego      ./kube-lego
-```
+Please see helm.sh for further info.
