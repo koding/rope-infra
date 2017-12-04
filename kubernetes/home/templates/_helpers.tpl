@@ -10,6 +10,6 @@
 {{- end -}}
 
 {{- define "home.ropeServer" -}}
-{{- $ropeAdrr := printf "home-home.%s.%s" .Values.envName .Values.baseDomain -}}
+{{- $ropeAdrr := printf "//server-server.%s.%s" .Values.envName .Values.baseDomain -}}
 {{- default $ropeAdrr .Values.ropeServer -}}
 {{- end -}}
