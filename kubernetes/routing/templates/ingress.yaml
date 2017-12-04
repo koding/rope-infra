@@ -57,7 +57,7 @@ spec:
 
     # This section is only required if TLS is to be enabled for the Ingress
   tls:
-    - secretName: {{ .Values.envName }}-rope-tls
+    - secretName: {{ required "A valid envName is required!" .Values.envName }}-{{ .Values.baseDomain | replace "." "-" }}-tls
       hosts:
         - "twine-twine.{{ template "env.domainSuffix" . }}"  
         - "home-home.{{ template "env.domainSuffix" . }}"
