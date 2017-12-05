@@ -30,8 +30,7 @@ function check-custom-env-vars() {
 	env_vars=(SESSION_SECRET GITHUB_CLIENT_ID GITHUB_CLIENT_SECRET)
 	for var_key in "${env_vars[@]}"; do
 		key=ROPE_$var_key
-		declare -p $key &>/dev/null || echo "$key should be set."
-		eval "export $var_key=\$$key"
+		declare -p $key &>/dev/null || (echo "$key should be set." && exit 1)
 	done
 }
 
@@ -43,7 +42,7 @@ function upgrade-templates() {
 	helm upgrade --install --namespace $NAMESPACE --set appName=counter --set mongodbURL=$MONGODB_URL --set redisURL=$REDIS_URL $ENV_SUFFIX-counter ./count
 	helm upgrade --install --namespace $NAMESPACE --set appName=compactor --set mongodbURL=$MONGODB_URL --set redisURL=$REDIS_URL $ENV_SUFFIX-compactor ./count
 	# rope components
-	helm upgrade --install --namespace $NAMESPACE --set envName=$ENV_SUFFIX --set baseDomain=$BASE_DOMAIN --set mongodbURL=$MONGODB_URL $ENV_SUFFIX-home ./home
+	helm upgrade --install --namespace $NAMESPACE --set envName=$ENV_SUFFIX --set baseDomain=$BASE_DOMAIN --set mongodbURL=$MONGODB_URL --set githubClientId=$ROPE_GITHUB_CLIENT_ID --set githubClientSecret=$ROPE_GITHUB_CLIENT_SECRET --set sessionSecret=$ROPE_SESSION_SECRET $ENV_SUFFIX-home ./home
 	helm upgrade --install --namespace $NAMESPACE --set redisURL="redis://$REDIS_URL" $ENV_SUFFIX-twine ./twine
 	helm upgrade --install --namespace $NAMESPACE $ENV_SUFFIX-server ./server
 	helm upgrade --install --namespace $NAMESPACE $ENV_SUFFIX-rest ./rest
