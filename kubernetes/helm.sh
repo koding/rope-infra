@@ -2,7 +2,7 @@
 
 # Validate that this file is called from the parent bash script.
 PARENT_COMMAND="$(ps -o args= $PPID)"
-should_contain_str="infra/rope.sh helm"
+should_contain_str="rope.sh helm"
 if [[ "$PARENT_COMMAND" != *$should_contain_str* ]]; then
 	echo 'This file should not be called directly, use "rope.sh helm" instead'
 	exit 1
@@ -12,6 +12,7 @@ fi
 pushd "$(dirname "$0")"
 
 function set-env-vars() {
+	check-custom-env-vars
 	export ENV_PREFIX=${ENV_PREFIX:-"rope"}
 	export ENV_SUFFIX=${ENV_SUFFIX:-"stage"} # for production change env suffix to prod
 	export NAMESPACE=${NAMESPACE:-$ENV_PREFIX-$ENV_SUFFIX}
@@ -23,6 +24,15 @@ function set-env-vars() {
 	export MONGODBDATABASE=${MONGODBDATABASE:-"rope"}
 	export MONGODB_URL=${MONGODB_URL:-"mongodb://$MONGODBUSERNAME:$MONGODBPASSWORD@$ENV_SUFFIX-mongodb-mongodb:27017/$MONGODBDATABASE"}
 	export REDIS_URL=${REDIS_URL:-"$ENV_SUFFIX-redis-redis:6379"}
+}
+
+function check-custom-env-vars() {
+	env_vars=(SESSION_SECRET GITHUB_CLIENT_ID GITHUB_CLIENT_SECRET)
+	for var_key in "${env_vars[@]}"; do
+		key=ROPE_$var_key
+		declare -p $key &>/dev/null || echo "$key should be set."
+		eval "export $var_key=\$$key"
+	done
 }
 
 function upgrade-templates() {
